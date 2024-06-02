@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class WeatherInfoBody extends StatelessWidget {
-  const WeatherInfoBody({Key? key}) : super(key: key);
+  const WeatherInfoBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class WeatherInfoBody extends StatelessWidget {
             height: 32,
           ),
           const Text(
-            'Ligh Rain',
+            'Light Rain',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 32,
