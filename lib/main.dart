@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/views/no_weather_page.dart';
 import 'package:weather_app/views/search_page.dart';
-import 'package:weather_app/views/weather_display_page.dart';
+import 'package:weather_app/views/weather_body.dart';
 
 void main() {
   runApp(const WeatherApp());
