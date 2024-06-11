@@ -4,7 +4,7 @@ class WeatherModel {
   final double maxtemp;
   final double mintemp;
   final String weatherCondition;
-  final String date;
+  final DateTime date;
   final String? image;
 
   WeatherModel({
@@ -25,7 +25,7 @@ class WeatherModel {
       mintemp: json['forecast']['forecastday'][0]['day']['mintemp_c'],
       weatherCondition: json['forecast']['forecastday'][0]['day']['condition']
           ['text'],
-      date: json['current']['last_updated'],
+      date: DateTime.parse(json['current']['last_updated']),
       image: json['forecast']['forecastday'][0]['day']['condition']['icon'],
     );
   }
