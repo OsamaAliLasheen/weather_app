@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/cubits/get_weather_cubit/get_weather_cubit.dart';
+import 'package:weather_app/cubits/get_weather_cubit/get_weather_states.dart';
 import 'package:weather_app/views/home_view.dart';
 
 void main() {
@@ -13,34 +14,27 @@ class WeatherApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GetWeatherCubit(),
-      child: const CustomMaterialApp(),
-    );
+        create: (context) => GetWeatherCubit(),
+        child: Builder(
+            builder: (context) => BlocBuilder<GetWeatherCubit, WeatherState>(
+                  builder: (context, state) {
+                    return MaterialApp(
+                      theme: ThemeData(
+                        appBarTheme: AppBarTheme(
+                            color: getThemeColor(
+                          BlocProvider.of<GetWeatherCubit>(context)
+                              .weatherModel
+                              ?.weatherCondition,
+                        )),
+                      ),
+                      home: const HomeView(),
+                    );
+                  },
+                )));
   }
 }
 
-class CustomMaterialApp extends StatelessWidget {
-  const CustomMaterialApp({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-          primaryColor: Colors.blueGrey,
-          appBarTheme: AppBarTheme(
-              color: getMaterialColor(
-            BlocProvider.of<GetWeatherCubit>(context)
-                .weatherModel
-                ?.weatherCondition,
-          ))),
-      home: const HomeView(),
-    );
-  }
-}
-
-MaterialColor getMaterialColor(String? condition) {
+MaterialColor getThemeColor(String? condition) {
   if (condition == null) {
     return Colors.blue;
   }
@@ -66,7 +60,7 @@ MaterialColor getMaterialColor(String? condition) {
     case 'Light rain shower':
     case 'Moderate or heavy rain shower':
     case 'Torrential rain shower':
-      return Colors.blue;
+      return Colors.lightBlue;
     case 'Patchy snow possible':
     case 'Light snow':
     case 'Patchy light snow':
